@@ -1,17 +1,21 @@
-import { ClockIcon, HouseIcon, Settings, Sun, TimerIcon } from 'lucide-react';
+import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon, TimerIcon } from 'lucide-react';
 import styles from './Heading.module.css'
 
 
 function Heading() {
     return (
         <header className={styles.heading}>
-            <TimerIcon size={50}  className={styles.TimerIcon}/>
-            <h1>Chronos</h1>
-            <div className={styles.iconContainer}>
-                <button className={styles.BTNIcon}><HouseIcon/></button>
-                <button className={styles.BTNIcon}><ClockIcon/></button>
-                <button className={styles.BTNIcon}><Settings/></button>
-                <button className={styles.BTNIcon}><Sun/></button>
+            <div className={styles.logo}>
+                <a className={styles.logolink} href="#">
+                    <TimerIcon/>
+                    <span>Choronos</span>
+                </a>
+            </div>
+            <div className={styles.linkContainer}>
+                <a href='#' className={styles.linkIcon}><HouseIcon/></a>
+                <a href='#' className={styles.linkIcon}><HistoryIcon/></a>
+                <a href='#' className={styles.linkIcon}><SettingsIcon/></a>
+                <a href='#' className={styles.linkIcon}><SunIcon/></a>
             </div>
         </header>
     );

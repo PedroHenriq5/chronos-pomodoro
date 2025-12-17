@@ -1,4 +1,4 @@
-import { Heading, Setting, Clock, Footer } from './exports';
+import { Heading, Clock, Form, Footer } from './exports';
 
 
 function App(){
@@ -6,6 +6,7 @@ function App(){
         <>
             <Heading />
             <Clock />
+            <Form />
             <Footer />
         </>
     );
