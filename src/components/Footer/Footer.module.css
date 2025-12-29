@@ -1,9 +1,18 @@
 .footer{
-    width: 100%;
-    height: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.footer a{
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.footer a:hover{
+    text-decoration: underline;
 }

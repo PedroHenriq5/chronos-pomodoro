@@ -1,4 +1,3 @@
-import { PlayIcon } from 'lucide-react';
 import Styles from './Clock.module.css';
 
 function Clock() {

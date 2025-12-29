@@ -1,21 +1,26 @@
 import styles from './Form.module.css';
 import Input from '../DefaultInput/Input';
+import Cyclos from '../Cycles/Cycles';
+import Button from '../Button/Button';  
+import { PlayCircleIcon } from 'lucide-react';
 
 function Form() {
+    function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+    };
     return (
-        <form action="" className={styles.form}>
+        <form action="" className={styles.form} onClick={handleSubmit}>
             <div className={styles.formRow}>
-                <Input labelText='teste' id='input' type='text' placeholder='Digite aqui'/>
+                <Input id='input' type='text' placeholder='Digite aqui'/>
             </div>
             <div className={styles.formRow}>
                 <p>Lorem ipsum dolor sit amet.</p>
             </div>
             <div className={styles.formRow}>
-                <p>Ciclos</p>
-                <p>0 0 0 </p>
+                <Cyclos />
             </div>
             <div className={styles.formRow}>
-                <button>Enviar</button>
+                <Button icon= {<PlayCircleIcon />}/>
             </div>
         </form>
     )
