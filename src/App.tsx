@@ -1,13 +1,13 @@
-import { Heading, Clock, Form, Footer } from './exports';
+/* import  Home  from './pages/Home/Home'; */
+/* import Settings  from './pages/Settings/Settings'; */
+/* import History  from './pages/Historys/History';  */
+import NotFound from './pages/NotFound/NotFound';   
 
 
 function App(){
     return ( 
         <>
-            <Heading />
-            <Clock />
-            <Form />
-            <Footer />
+            <NotFound />
         </>
     );
 }

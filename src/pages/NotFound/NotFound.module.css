@@ -1,0 +1,16 @@
+.NotFoundContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.NotFoundContent{
+    text-align: justify;
+    width: 50%;
+    margin-bottom: 10rem;
+    margin-top: 3rem;
+    line-height: 2.5rem;
+    
+}

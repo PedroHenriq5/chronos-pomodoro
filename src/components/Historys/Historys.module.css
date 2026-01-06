@@ -1,0 +1,28 @@
+.HistorysContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.HistorysHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+    gap: 3rem;
+}
+
+.HistorysHeader p{
+    flex: 1;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.TrashButton{
+    background-color: var(--error);
+    color: var(--text-default);
+    padding: 0.5rem;
+}

@@ -13,15 +13,16 @@
 
 }
 
-.BTNIcon{
+.saveBTN{
     color: var(--gray-900);
     background-color: var(--link-color);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    width: 25rem;
 }
 
 
-.BTNIcon:hover{
+.saveBTN:hover{
     background-color: var(--link-hover);
 }
