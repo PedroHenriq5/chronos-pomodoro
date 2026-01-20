@@ -1,10 +1,15 @@
 import Styles from './Clock.module.css';
+import { TaskContext } from '../../contexts/TaskContext/TaskContext';
+import { useContext } from 'react';
 
 function Clock() {
+
+    const { state, setState } = useContext(TaskContext);
+
     return (
         <section className={Styles.clockContainer}>
             <div className={Styles.timer}>
-                <span>00:00</span>
+                <span>{state.formattedSecondsRemaining}</span>
             </div>
         </section>
     );

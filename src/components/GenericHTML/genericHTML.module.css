@@ -1,43 +1,43 @@
-.generic h1 {
+.genericHtml h1 {
   font-size: 3.2rem;
   margin-bottom: 1.6rem;
 }
 
-.generic h2 {
+.genericHtml h2 {
   font-size: 2.4rem;
   margin-bottom: 1.2rem;
 }
 
-.generic h3 {
+.genericHtml h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.generic p {
+.genericHtml p {
   font-size: 1.6rem;
   line-height: 1.6;
   margin-bottom: 1.6rem;
 }
 
-.generic a {
+.genericHtml a {
   color: var(--link-color);
   text-decoration: none;
   font-weight: bold;
 }
 
-.generic a:hover {
+.genericHtml a:hover {
   text-decoration: underline;
 }
 
-.generic ul {
+.genericHtml ul {
   padding-left: 2.4rem;
 }
 
-.generic li {
+.genericHtml li {
   margin-bottom: 0.8rem;
 }
 
-.generic img {
+.genericHtml img {
   max-width: 100%;
   height: auto;
   border-radius: 0.8rem;

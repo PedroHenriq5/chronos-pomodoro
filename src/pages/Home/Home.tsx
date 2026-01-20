@@ -2,10 +2,11 @@ import { Clock, Form } from '../../exports';
 import MainTemplate from '../../templates/mainForm/MainForm';
 
 function Home() {
+    
     return (
             <MainTemplate>
-                <Clock />
-                <Form />
+                <Clock  />
+                <Form  />
             </MainTemplate>
     );
 }

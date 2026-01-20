@@ -1,14 +1,14 @@
-/* import  Home  from './pages/Home/Home'; */
-/* import Settings  from './pages/Settings/Settings'; */
-/* import History  from './pages/Historys/History';  */
-import NotFound from './pages/NotFound/NotFound';   
+import Home from './pages/Home/Home';
+import TaskContextProvider from './contexts/TaskContext/TaskContextProvider';
 
 
-function App(){
-    return ( 
-        <>
-            <NotFound />
-        </>
+
+function App() {
+
+    return (
+        <TaskContextProvider>
+            <Home/>
+        </TaskContextProvider>
     );
 }
 
