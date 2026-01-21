@@ -7,12 +7,15 @@ import {  useRef } from 'react';
 import type { TaskModel } from '../../models/TaskModel';
 import useTaskContext from '../../contexts/TaskContext/useTaskContext';
 import NextCycle from '../../utils/NextCycle';
+import TypeNextCycle from '../../utils/TypeNextCycle';
+import FormatSecondsToMinutes from '../../utils/formatSecondsToMinutes';
 
 function Form() {
     const { state, setState } = useTaskContext();
 
     const taskNameInput = useRef<HTMLInputElement>(null);
-    const nextCycle = NextCycle(state.currentCycle);
+    const nextCycle = NextCycle(state.currentCycle);    
+    const typeNextCycle = TypeNextCycle(nextCycle);
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
@@ -30,22 +33,24 @@ function Form() {
             startDate: Date.now(),
             completeDate: null,
             interruptedDate: null,
-            duration: 1,
-            type: 'workTime',
+            duration: state.config[typeNextCycle],
+            type: typeNextCycle,
         };
+
+        const secondRemaining = newTask.duration * 60;
+
         setState(prevState => {
             return {
                 ...prevState,
                 activeTask: newTask,
                 config: {...prevState.config},
                 currentCycle: nextCycle,
-                secondRemaining: newTask.duration * 60,
-                formattedSecondsRemaining: "00:00",
+                secondRemaining,
+                formattedSecondsRemaining: FormatSecondsToMinutes(secondRemaining),
                 tasks: [...prevState.tasks, newTask],
             }
         })
     };
-    console.log(nextCycle)
     return (
         <form action="" className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formRow}>
