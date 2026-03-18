@@ -10,6 +10,7 @@ import NextCycle from '../../utils/NextCycle';
 import TypeNextCycle from '../../utils/TypeNextCycle';
 import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
 import Tips from './Tips';
+import MessageType from '../../adapters/MessageType';
 
 function Form() {
     const { state, dispatch } = useTaskContext();
@@ -20,11 +21,12 @@ function Form() {
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
+        MessageType.dismiss();
 
         if (!taskNameInput.current) return
         const taskName = taskNameInput.current?.value.trim();
         if (!taskName) {
-            alert('Por favor, insira um nome para a tarefa.');
+            MessageType.warning('Por favor, insira um nome para a tarefa.');
             return;
         };
 
@@ -46,6 +48,8 @@ function Form() {
     };
 
     function StopCycle() {
+        MessageType.dismiss();
+        MessageType.info('Ciclo interrompido.');
         dispatch({
             type: TaskActionTypes.INTERRUPT_TASK,
         })
