@@ -1,6 +1,8 @@
 import { HistoryIcon, HouseIcon, MoonIcon, SettingsIcon, SunIcon, TimerIcon, } from 'lucide-react';
 import styles from './Heading.module.css'
 import { useState, useEffect } from 'react';
+import RouterLink from '../RouterLink/RouterLink';
+
 
 type AvaliableThemes = 'light' | 'dark';
 
@@ -40,9 +42,9 @@ function Heading() {
                 </a>
             </div>
             <div className={styles.linkContainer}>
-                <a href='#' aria-label='Home' title='Home' className={styles.linkIcon}><HouseIcon /></a>
-                <a href='#' aria-label='History' title='History' className={styles.linkIcon}><HistoryIcon /></a>
-                <a href='#' aria-label='Settings' title='Settings' className={styles.linkIcon}><SettingsIcon /></a>
+                <RouterLink href='/' aria-label='Home' title='Home' className={styles.linkIcon}><HouseIcon /></RouterLink>
+                <RouterLink href='/history' aria-label='History' title='History' className={styles.linkIcon}><HistoryIcon /></RouterLink>
+                <RouterLink href='/settings' aria-label='Settings' title='Settings' className={styles.linkIcon}><SettingsIcon /></RouterLink>
                 <a href='#' onClick={handleThemeChange} aria-label='Theme Toggle' title='Theme Toggle' className={styles.linkIcon}>{nextTheme[theme]}</a>
             </div>
         </header>
