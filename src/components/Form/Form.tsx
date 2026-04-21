@@ -18,6 +18,7 @@ function Form() {
     const taskNameInput = useRef<HTMLInputElement>(null);
     const nextCycle = NextCycle(state.currentCycle);
     const typeNextCycle = TypeNextCycle(nextCycle);
+    const LastTaskName = state.tasks.at(-1)?.name ?? '';
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
@@ -29,7 +30,6 @@ function Form() {
             MessageType.warning('Por favor, insira um nome para a tarefa.');
             return;
         };
-
 
         const newTask: TaskModel = {
             id: Date.now().toString(),
@@ -56,13 +56,10 @@ function Form() {
 
     };
 
-
-
-
     return (
         <form action="" className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formRow}>
-                <Input id='input' type='text' placeholder='Digite aqui' ref={taskNameInput} disabled={!!state.activeTask} />
+                <Input id='input' type='text' placeholder='Digite aqui' ref={taskNameInput} disabled={!!state.activeTask} defaultValue={LastTaskName} />
             </div>
             <div className={styles.formRow}>
                 <Tips />
