@@ -15,14 +15,22 @@
     gap: 3rem;
 }
 
-.HistorysHeader p{
+.button {
+  min-width: auto;
+  width: 8rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.button svg{
+    width: 2.3rem;
+    height: 2.3rem;
+}
+
+.HistorysHeader span{
     flex: 1;
     font-size: 3rem;
     font-weight: bold;
 }
 
-.TrashButton{
-    background-color: var(--error);
-    color: var(--text-default);
-    padding: 0.5rem;
-}
+
