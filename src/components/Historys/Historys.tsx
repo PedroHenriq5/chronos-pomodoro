@@ -1,8 +1,12 @@
 import { Trash2Icon } from "lucide-react";
 import Button from "../Button/Button";
 import Styles from './Historys.module.css';
+import useTaskcontext  from "../../contexts/TaskContext/useTaskContext";
+import FormatDate from "../../utils/FormatDate";
 
 function Historys() {
+    const { state } = useTaskcontext();
+
     return (
         <div className={Styles.HistorysContainer}>
             <div className={Styles.HistorysHeader}>
@@ -16,11 +20,11 @@ function Historys() {
                     </Button>
                 </span>
             </div>
-            <div className="responsiveTable">
+            <div className={Styles.responsiveTable}>
                 <table>
                     <thead>
                         <tr>
-                            <th>Tarefa</th>
+                            <th>tarefa</th>
                             <th>Duração</th>
                             <th>Data</th>
                             <th>Status</th>
@@ -28,13 +32,18 @@ function Historys() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Estudar</td>
-                            <td>25min</td>
-                            <td>20/04/2025 08:00</td>
-                            <td>Completa</td>
-                            <td>Foco</td>
-                        </tr>
+                        {state.tasks.map(task => {
+                            return(
+                                <tr key={task.id}>
+                                    <td>{task.name}</td>
+                                    <td>{task.duration}min</td>
+                                    <td>{FormatDate(task.startDate)}</td>
+                                    <td>{task.type}</td>
+                                    <td>{task.type}</td>
+                                </tr>
+                            )
+                        })}
+
                     </tbody>
                 </table>
             </div>
