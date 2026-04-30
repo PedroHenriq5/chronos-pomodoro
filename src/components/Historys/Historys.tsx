@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import Styles from './Historys.module.css';
 import useTaskcontext  from "../../contexts/TaskContext/useTaskContext";
 import FormatDate from "../../utils/FormatDate";
+import StatusType from "../../utils/StatusType";
 
 function Historys() {
     const { state } = useTaskcontext();
@@ -33,13 +34,20 @@ function Historys() {
                     </thead>
                     <tbody>
                         {state.tasks.map(task => {
+                            const taskTypeDictionary = {
+                                workTime : "Foco",
+                                shortBreakTime : "Pausa Curta",
+                                longBreakTime : "Pausa Longa"
+
+                            }
+
                             return(
                                 <tr key={task.id}>
                                     <td>{task.name}</td>
                                     <td>{task.duration}min</td>
                                     <td>{FormatDate(task.startDate)}</td>
-                                    <td>{task.type}</td>
-                                    <td>{task.type}</td>
+                                    <td>{StatusType(task, state.activeTask)}</td>
+                                    <td>{taskTypeDictionary[task.type]}</td>
                                 </tr>
                             )
                         })}
