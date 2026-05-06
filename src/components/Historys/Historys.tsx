@@ -1,12 +1,43 @@
-import { Trash2Icon } from "lucide-react";
-import Button from "../Button/Button";
 import Styles from './Historys.module.css';
-import useTaskcontext  from "../../contexts/TaskContext/useTaskContext";
+import useTaskContext from "../../contexts/TaskContext/useTaskContext";
 import FormatDate from "../../utils/FormatDate";
 import StatusType from "../../utils/StatusType";
+import sortTask, { type TaskOptions } from "../../utils/SortTask";
+import { useState } from 'react';
+import { Trash2Icon } from 'lucide-react';
+import Button from '../Button/Button';
+
+
 
 function Historys() {
-    const { state } = useTaskcontext();
+    const { state } = useTaskContext();
+    const [sortedField, setSortedField] = useState<TaskOptions>(
+        () => {
+            return {
+                tasks: sortTask({ tasks: state.tasks }),
+                field: "startDate",
+                direction: "desc",
+            };
+        },
+    );
+
+
+    function handleSortedTasks({field}: Pick<TaskOptions, 'field'>) {
+        setSortedField(sortedField => {
+                const direction = sortedField.direction === "desc" ? "asc" : "desc";
+
+                return {
+                    ...sortedField,
+                    field: field,
+                    tasks: sortTask({ 
+                        tasks: state.tasks,
+                        field,
+                        direction,
+                    }),
+                    direction
+                };
+            });
+    }
 
     return (
         <div className={Styles.HistorysContainer}>
@@ -25,23 +56,33 @@ function Historys() {
                 <table>
                     <thead>
                         <tr>
-                            <th>tarefa</th>
-                            <th>Duração</th>
-                            <th>Data</th>
-                            <th>Status</th>
-                            <th>Tipo</th>
+                            <th onClick={() => handleSortedTasks({ field: "name" })}
+                                className={Styles.clickableHeader}>
+                                tarefa</th>
+                            <th onClick={() => handleSortedTasks({ field: "duration" })}
+                                className={Styles.clickableHeader}>
+                                Duração</th>
+                            <th onClick={() => handleSortedTasks({ field: "startDate" })}
+                                className={Styles.clickableHeader}>
+                                Data</th>
+                            <th 
+                                className={Styles.clickableHeader}>
+                                Status</th>
+                            <th onClick={() => handleSortedTasks({ field: "type" })}
+                                className={Styles.clickableHeader}>
+                                Tipo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {state.tasks.map(task => {
+                        {sortedField.tasks.map(task => {
                             const taskTypeDictionary = {
-                                workTime : "Foco",
-                                shortBreakTime : "Pausa Curta",
-                                longBreakTime : "Pausa Longa"
+                                workTime: "Foco",
+                                shortBreakTime: "Pausa Curta",
+                                longBreakTime: "Pausa Longa"
 
                             }
 
-                            return(
+                            return (
                                 <tr key={task.id}>
                                     <td>{task.name}</td>
                                     <td>{task.duration}min</td>

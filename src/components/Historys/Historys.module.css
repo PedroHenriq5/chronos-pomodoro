@@ -60,3 +60,13 @@
     padding: 1.6rem;
     text-align: left;
 }
+
+
+.clickableHeader{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.clickableHeader:hover{
+    filter: brightness(80%);
+}
