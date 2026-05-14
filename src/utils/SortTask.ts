@@ -22,7 +22,7 @@ function sortTask({
     if(aValue === null) return 1;
     if(bValue === null) return -1;
 
-        /* Comparando valores do tipo número */
+    /* Comparando valores do tipo número */
 
     if(typeof aValue === "number" && typeof bValue === "number"){
         return direction === "asc" 

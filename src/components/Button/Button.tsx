@@ -3,6 +3,7 @@ import styles from './Button.module.css'
 type ButtonProps = {
     icon: React.ReactNode;
     color?: 'green' | 'red';
+    onClick?: () => void;
 } & React.ComponentProps<'button'>;
 
 

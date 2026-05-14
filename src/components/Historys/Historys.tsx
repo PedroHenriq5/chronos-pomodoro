@@ -3,40 +3,47 @@ import useTaskContext from "../../contexts/TaskContext/useTaskContext";
 import FormatDate from "../../utils/FormatDate";
 import StatusType from "../../utils/StatusType";
 import sortTask, { type TaskOptions } from "../../utils/SortTask";
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Trash2Icon } from 'lucide-react';
 import Button from '../Button/Button';
+import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
 
 
 
 function Historys() {
-    const { state } = useTaskContext();
-    const [sortedField, setSortedField] = useState<TaskOptions>(
-        () => {
-            return {
-                tasks: sortTask({ tasks: state.tasks }),
-                field: "startDate",
-                direction: "desc",
-            };
-        },
-    );
+    const { state, dispatch } = useTaskContext();
+
+    const [sortedField, setSortedField] = useState<
+        Pick<TaskOptions, "field" | "direction">
+    >({
+        field: "startDate",
+        direction: "desc",
+    });
+
+    const sortedTasks = useMemo(() => {
+        return sortTask({
+            tasks: state.tasks,
+            field: sortedField.field,
+            direction: sortedField.direction,
+        });
+    }, [state.tasks, sortedField]);
+
+    function handleDeleteHistory() {
+        return dispatch({
+            type: TaskActionTypes.RESET_STATE,
+        });
+    }
 
 
-    function handleSortedTasks({field}: Pick<TaskOptions, 'field'>) {
+    function handleSortedTasks({ field }: Pick<TaskOptions, 'field'>) {
         setSortedField(sortedField => {
-                const direction = sortedField.direction === "desc" ? "asc" : "desc";
+            const direction = sortedField.direction === "desc" ? "asc" : "desc";
 
-                return {
-                    ...sortedField,
-                    field: field,
-                    tasks: sortTask({ 
-                        tasks: state.tasks,
-                        field,
-                        direction,
-                    }),
-                    direction
-                };
-            });
+            return {
+                field: field,
+                direction
+            };
+        });
     }
 
     return (
@@ -48,8 +55,9 @@ function Historys() {
                         color="red"
                         icon={<Trash2Icon />}
                         className={Styles.button}
-                        aria-label="Apagar historico">
-                    </Button>
+                        aria-label="Apagar historico"
+                        onClick={handleDeleteHistory}
+                    />
                 </span>
             </div>
             <div className={Styles.responsiveTable}>
@@ -65,7 +73,7 @@ function Historys() {
                             <th onClick={() => handleSortedTasks({ field: "startDate" })}
                                 className={Styles.clickableHeader}>
                                 Data</th>
-                            <th 
+                            <th
                                 className={Styles.clickableHeader}>
                                 Status</th>
                             <th onClick={() => handleSortedTasks({ field: "type" })}
@@ -74,24 +82,33 @@ function Historys() {
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedField.tasks.map(task => {
-                            const taskTypeDictionary = {
-                                workTime: "Foco",
-                                shortBreakTime: "Pausa Curta",
-                                longBreakTime: "Pausa Longa"
+                        {state.tasks.length === 0 ? (
+                            <tr>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                            </tr>
+                        ) : (
+                            sortedTasks.map(task => {
+                                const taskTypeDictionary = {
+                                    workTime: "Foco",
+                                    shortBreakTime: "Pausa Curta",
+                                    longBreakTime: "Pausa Longa"
+                                };
 
-                            }
-
-                            return (
-                                <tr key={task.id}>
-                                    <td>{task.name}</td>
-                                    <td>{task.duration}min</td>
-                                    <td>{FormatDate(task.startDate)}</td>
-                                    <td>{StatusType(task, state.activeTask)}</td>
-                                    <td>{taskTypeDictionary[task.type]}</td>
-                                </tr>
-                            )
-                        })}
+                                return (
+                                    <tr key={task.id}>
+                                        <td>{task.name}</td>
+                                        <td>{task.duration}min</td>
+                                        <td>{FormatDate(task.startDate)}</td>
+                                        <td>{StatusType(task, state.activeTask)}</td>
+                                        <td>{taskTypeDictionary[task.type]}</td>
+                                    </tr>
+                                );
+                            })
+                        )}
 
                     </tbody>
                 </table>

@@ -3,6 +3,7 @@ import type { TaskActionModel } from "./TaskActions";
 import { TaskActionTypes } from "./TaskActions";
 import NextCycle from '../../utils/NextCycle';
 import FormatSecondsToMinutes from "../../utils/FormatSecondsToMinutes";
+import { initialTaskState } from "./initialTaskState";
 
 
 function TaskReducer(
@@ -45,7 +46,7 @@ function TaskReducer(
                 })
             };
         case TaskActionTypes.RESET_STATE:
-            return state;
+            return {...initialTaskState};
         case TaskActionTypes.COUNT_DOWN:
             return {
                 ...state,
@@ -69,6 +70,11 @@ function TaskReducer(
                     return task;    
                 })
             };
+            case TaskActionTypes.CHANGE_TASK:
+                return {
+                    ...state,
+                    config: action.payload,
+                }
     }
      return state;
 };
