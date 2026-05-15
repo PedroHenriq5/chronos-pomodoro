@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 function Clock() {
 
-    const { state, setState } = useContext(TaskContext);
+    const { state } = useContext(TaskContext);
 
     return (
         <section className={Styles.clockContainer}>
