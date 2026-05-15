@@ -8,8 +8,9 @@ type AvaliableThemes = 'light' | 'dark';
 
 function Heading() {
     const [theme, setTheme] = useState<AvaliableThemes>(() => {
-        const storageThemes = localStorage.getItem('theme') as AvaliableThemes | 'dark';
-        return storageThemes;
+        const storageTheme = localStorage.getItem('theme') as AvaliableThemes | null;
+
+        return storageTheme ?? 'dark';
     });
 
     function handleThemeChange(
@@ -17,16 +18,17 @@ function Heading() {
     ) {
         e.preventDefault();
 
-        setTheme(prevTheme => {
-            const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
-            return newTheme;
-        });
+        setTheme(prevTheme =>
+            prevTheme === 'dark' ? 'light' : 'dark'
+        );
     }
+
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
+
+        localStorage.setItem('theme', theme);
     }, [theme]);
 
-    localStorage.setItem('theme', theme);
 
     const nextTheme = {
         dark: <SunIcon />,
